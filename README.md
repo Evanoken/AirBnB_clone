@@ -1,5 +1,4 @@
-#This is a description of the AirBnB webpage
-An ALX project that enables us to put new development abilities into practice as we learn them is the AirBnB clone project. Over the next few months, this web application will be pieced together to the point where it resembles the genuine Airbnb website in both appearance and functionality.
+#This is a description of the AirBnB webpage An ALX project that enables us to put new development abilities into practice as we learn them is the AirBnB clone project. Over the next few months, this web application will be pieced together to the point where it resembles the genuine Airbnb website in both appearance and functionality.
 
 #How the console application works
 

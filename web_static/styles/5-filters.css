@@ -1,0 +1,51 @@
+.container .filters {
+    background-color: white;
+    height: 70px;
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    position: relative;
+}
+
+button {
+    font-size: 18px;
+    background-color: #FF5A5F;
+    color: #FFFFFF;
+    height: 48px;
+    width: 20%;
+    border-radius: 4px;
+    position: absolute;
+    top: 10px;
+    right: 30px;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.filters div {
+    height: 100%;
+    width: 25%;
+    position: relative;
+    display: inline-block;
+    margin-top: 0;
+}
+
+.filters h3, h4 {
+    margin-left: 15%;
+}
+
+.locations {
+    border-right: 1px solid #DDDDDD;
+}
+
+h3 {
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+h4 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 0;
+}
