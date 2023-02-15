@@ -1,43 +1,52 @@
 #!/usr/bin/python3
+"""Defines a class Base"""
+import uuid
 from datetime import datetime
 import models
-from uuid import uuid4
-"""
-module
-"""
 
 
-class BaseModel():
-    """ Parent of all other classes """
+class BaseModel:
+    """ Class that defines properties of base """
+
     def __init__(self, *args, **kwargs):
-        """ Creates attributes """
-        format = '%Y-%m-%dT%H:%M:%S.%f'
-        if kwargs:
-            for k, v in kwargs.items():
-                if k == 'created_at' or k == 'updated_at':
-                    v = datetime.strptime(v, format)
-                if k != '__class__':
-                    setattr(self, k, v)
-        else:
-            self.id = str(uuid4())
+        """ Creates new instances of Base """
+        if not kwargs:
+            self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
             models.storage.new(self)
+        else:
+            time_format = "%Y-%m-%dT%H:%M:%S.%f"
+            for (key, value) in kwargs.items():
+                if key in ('created_at', 'updated_at'):
+                    self.__dict__[key] = datetime.strptime(value, time_format)
+                else:
+                    self.__dict__[key] = value
 
     def __str__(self):
-        """ Returns a formatted string of class attributes """
-        return ("[{}] ({}) {}".format(self.__class__.__name__, self.id,
-                                      self.__dict__))
+        """Returns a string represation of class details.
+        Returns:
+            str: class details
+        """
+        string = "["
+        string += str(self.__class__.__name__) + '] ('
+        string += str(self.id) + ') ' + str(self.__dict__)
+        return string
 
     def save(self):
-        """ Updates updated_at value to current time """
+        """Update public instance attribute updated_at with current datetime.
+        """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """ Creates a dictionary of class attributes """
-        d = self.__dict__.copy()
-        d['__class__'] = self.__class__.__name__
-        d['created_at'] = self.created_at.isoformat()
-        d['updated_at'] = self.updated_at.isoformat()
-        return d
+        """Returns a dictionary containing all key/values of __dict__ of
+        the instance.
+        Returns:
+            dict: key/value pairs.
+        """
+        dict_ = self.__dict__.copy()
+        dict_['__class__'] = self.__class__.__name__
+        dict_['created_at'] = self.created_at.isoformat()
+        dict_['updated_at'] = self.updated_at.isoformat()
+        return dict_
